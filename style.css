@@ -10,6 +10,40 @@ body {
     animation: fadeIn 1s ease-in forwards;
 }
 
+body.light-mode {
+    background-color: #f0f0f0;
+    color: #1a1a1a;
+}
+
+body.light-mode .project-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+
+.contact-links img.light-mode-icon {
+    filter: invert(1);
+}
+
+#theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px 15px;
+    background-color: #7852ee;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 1000;
+    font-family: 'Fira Code', monospace;
+    font-size: 1rem;
+}
+
+body.light-mode #theme-toggle {
+    background-color: #1a1a1a;
+    color: #f0f0f0;
+}
+
 .container {
     max-width: 800px;
     margin: 0 auto;
@@ -156,4 +190,10 @@ section {
     background-color: #7852ee;
     color: #fff;
     text-decoration: none;
+}
+
+@media (max-width: 600px) {
+    .contact-links {
+        gap: 2rem;
+    }
 }

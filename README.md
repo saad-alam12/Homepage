@@ -1,81 +1,29 @@
-# Personal Website
+# Saad Alam's Homepage
 
-This repository contains the source code for my personal website. It's a simple, single-page application built with HTML, CSS, and JavaScript.
+This is the source code for my personal homepage.
 
-## Table of Contents
+## Files
 
-- [Project Structure](#project-structure)
-- [HTML (`index.html`)](#html-indexhtml)
-- [CSS (`style.css`)](#css-stylecss)
-- [JavaScript (`script.js`)](#javascript-scriptjs)
-- [Icons](#icons)
+### `index.html`
 
-## Project Structure
+This is the main HTML file. It sets up the structure of the page, including the header, about me section, projects section, and contact information. It also includes a button to toggle between light and dark themes.
 
-The project is organized as follows:
+### `style.css`
 
-```
-/
-├── index.html
-├── style.css
-├── script.js
-├── LebenslaufSaadAlam2025.pdf
-├── README.md
-└── icons/
-    ├── email.svg
-    ├── github.svg
-    ├── linkedin.svg
-    └── x.svg
-```
+This file contains the styling for the homepage. It uses a dark theme by default, but also includes a light theme that can be toggled. The file also contains animations and responsive design for different screen sizes.
 
-- `index.html`: The main HTML file that defines the structure of the website.
-- `style.css`: The stylesheet that controls the visual appearance of the website.
-- `script.js`: The JavaScript file that adds dynamic functionality to the website.
-- `LebenslaufSaadAlam2025.pdf`: My curriculum vitae (CV).
-- `README.md`: This file, providing an overview of the project.
-- `icons/`: A directory containing SVG icons for social media links.
+### `script.js`
 
-## HTML (`index.html`)
+This file contains the JavaScript for the homepage. It dynamically adds the projects to the page and handles the theme toggling. The user's theme preference is saved in the local storage.
 
-The `index.html` file is the skeleton of the website. It's a standard HTML5 document with a `<head>` and a `<body>`.
+### `LebenslaufSaadAlam2025.pdf`
 
-### Head
+My CV in PDF format.
 
-- **Meta Tags**: Includes basic meta information like character set (`UTF-8`) and viewport settings for responsive design.
-- **Title**: Sets the title of the page to "Saad Alam".
-- **Stylesheet**: Links to the `style.css` file to apply styling.
+### `icons/`
 
-### Body
+This directory contains the SVG icons for the contact links. It includes both light and dark versions of the icons.
 
-The body is wrapped in a `div` with the class `container` to center the content. It's divided into four main sections:
+## Theme Toggle
 
-1.  **Header**: Displays my name, "Saad Alam," and my title, "Physics Student at TUM (M.Sc.)."
-2.  **About Me (`#about`)**: A brief introduction about myself and a button to download my CV.
-3.  **Projects (`#projects`)**: A section to showcase my projects. The projects are dynamically loaded from the `script.js` file.
-4.  **Contact (`#contact`)**: Contains links to my social media profiles (X, GitHub, LinkedIn) and my email address.
-
-At the end of the body, the `script.js` file is included to add interactivity.
-
-## CSS (`style.css`)
-
-The `style.css` file is responsible for the visual design of the website. It uses a dark theme and a monospaced font (`Fira Code`) for a clean, modern look.
-
-### Key Features
-
-- **Dark Theme**: The background is a dark gray (`#1a1a1a`) and the text is a light gray (`#f0f0f0`).
-- **Responsive Design**: Uses media queries to adjust the layout for smaller screens (e.g., mobile devices).
-- **Animations**: Includes subtle animations like fade-ins and slide-ins to make the user experience more engaging.
-- **Project Cards**: The project cards have a hover effect that makes them lift up and change color.
-- **CV Download Button**: The download button has a distinct style and a hover effect.
-
-## JavaScript (`script.js`)
-
-The `script.js` file adds dynamic behavior to the website. It runs after the HTML document has been fully loaded (`DOMContentLoaded` event).
-
-### Functionality
-
-- **Dynamic Project Loading**: It defines an array of project objects, each with a `title`, `description`, and `link`. It then iterates over this array and creates a "project card" for each project, which is then appended to the project grid in the HTML. This makes it easy to add, remove, or update projects without having to modify the HTML directly.
-
-## Icons
-
-The `icons/` directory contains SVG (Scalable Vector Graphics) files for the social media links in the contact section. SVGs are used because they are lightweight and can be scaled to any size without losing quality.
+The theme toggle button allows users to switch between a light and dark theme. The user's preference is saved in the local storage, so the theme will persist across page loads.

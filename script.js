@@ -1,4 +1,35 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const themeToggle = document.getElementById('theme-toggle');
+    const body = document.body;
+    const contactIcons = document.querySelectorAll('.contact-links img');
+
+    const setLightMode = (isLight) => {
+        if (isLight) {
+            body.classList.add('light-mode');
+            themeToggle.textContent = 'Switch to Dark Mode';
+            contactIcons.forEach(icon => {
+                icon.classList.add('light-mode-icon');
+            });
+        } else {
+            body.classList.remove('light-mode');
+            themeToggle.textContent = 'Switch to Light Mode';
+            contactIcons.forEach(icon => {
+                icon.classList.remove('light-mode-icon');
+            });
+        }
+    };
+
+    themeToggle.addEventListener('click', () => {
+        const isLight = body.classList.contains('light-mode');
+        setLightMode(!isLight);
+        localStorage.setItem('theme', !isLight ? 'light' : 'dark');
+    });
+
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') {
+        setLightMode(true);
+    }
+
     const projects = [
         {
             title: 'Project 1',
