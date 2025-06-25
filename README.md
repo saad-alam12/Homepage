@@ -27,3 +27,13 @@ This directory contains the SVG icons for the contact links. It includes both li
 ## Theme Toggle
 
 The theme toggle button allows users to switch between a light and dark theme. The user's preference is saved in the local storage, so the theme will persist across page loads.
+
+### Implementation
+
+- **HTML**: A button with the ID `theme-toggle` is included in `index.html`.
+- **CSS**: The `style.css` file includes a `body.light-mode` class that changes the background and text colors. It also inverts the contact icons using `filter: invert(1)` when the light mode is active.
+- **JavaScript**: The `script.js` file contains the logic for the theme toggle.
+  - An event listener is added to the `theme-toggle` button.
+  - When the button is clicked, the `light-mode` class is toggled on the `body` element.
+  - The user's theme preference ('light' or 'dark') is saved to the `localStorage`.
+  - When the page loads, the script checks for a saved theme in the `localStorage` and applies it.
