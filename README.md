@@ -1,34 +1,81 @@
-# Personal Homepage
+# Personal Website
 
-This is a personal homepage for Saad Alam, a Physics student at TUM. It is designed to be a clean, minimal, and modern showcase of his work and interests.
+This repository contains the source code for my personal website. It's a simple, single-page application built with HTML, CSS, and JavaScript.
+
+## Table of Contents
+
+- [Project Structure](#project-structure)
+- [HTML (`index.html`)](#html-indexhtml)
+- [CSS (`style.css`)](#css-stylecss)
+- [JavaScript (`script.js`)](#javascript-scriptjs)
+- [Icons](#icons)
 
 ## Project Structure
 
-The project is structured as follows:
+The project is organized as follows:
 
-- `index.html`: This is the main HTML file that contains the structure of the homepage. It is divided into four sections: About Me, Projects, and Contact.
-- `style.css`: This file contains all the styles for the homepage. It is responsible for the layout, colors, fonts, and animations.
-- `script.js`: This file contains the JavaScript code for the homepage. It is responsible for dynamically adding the projects to the project grid.
-- `icons/`: This directory contains the SVG icons for the contact section.
+```
+/
+├── index.html
+├── style.css
+├── script.js
+├── LebenslaufSaadAlam2025.pdf
+├── README.md
+└── icons/
+    ├── email.svg
+    ├── github.svg
+    ├── linkedin.svg
+    └── x.svg
+```
 
-## Design
+- `index.html`: The main HTML file that defines the structure of the website.
+- `style.css`: The stylesheet that controls the visual appearance of the website.
+- `script.js`: The JavaScript file that adds dynamic functionality to the website.
+- `LebenslaufSaadAlam2025.pdf`: My curriculum vitae (CV).
+- `README.md`: This file, providing an overview of the project.
+- `icons/`: A directory containing SVG icons for social media links.
 
-The design of the homepage is based on the following principles:
+## HTML (`index.html`)
 
-- **Minimalism**: The design is clean and simple, with a focus on the content.
-- **Dark Mode**: The homepage uses a dark color scheme, which is easy on the eyes and gives the site a modern look.
-- **Monospace Font**: The homepage uses the 'Fira Code' monospace font, which gives the site a technical feel.
-- **Responsive**: The homepage is responsive, which means it looks good on all devices, from desktops to mobile phones.
-- **Animations**: The homepage uses subtle animations to make the site more dynamic and engaging.
+The `index.html` file is the skeleton of the website. It's a standard HTML5 document with a `<head>` and a `<body>`.
 
-## Customization
+### Head
 
-The homepage can be easily customized to your liking. Here are some of the things you can change:
+- **Meta Tags**: Includes basic meta information like character set (`UTF-8`) and viewport settings for responsive design.
+- **Title**: Sets the title of the page to "Saad Alam".
+- **Stylesheet**: Links to the `style.css` file to apply styling.
 
-- **Title**: To change the title of the homepage, edit the `<title>` tag in `index.html`.
-- **Name and Subtitle**: To change the name and subtitle in the header, edit the `<h1>` and `<p>` tags in `index.html`.
-- **About Me**: To change the content of the About Me section, edit the `<p>` tag in the `<section id="about">`.
-- **Projects**: To add or remove projects, edit the `projects` array in `script.js`. Each project is an object with a `title`, `description`, and `link`.
-- **Contact**: To change the contact email, edit the `href` attribute of the `<a>` tag in the `<section id="contact">`. To add your social media links, replace the `href` value in each `<a>` tag with your profile URL.
-- **Colors**: To change the colors of the homepage, edit the CSS variables in `style.css`. The `--primary-color` variable controls the accent color, and the `--background-color` and `--text-color` variables control the background and text colors, respectively.
-- **Fonts**: To change the fonts of the homepage, edit the `font-family` property in `style.css`.
+### Body
+
+The body is wrapped in a `div` with the class `container` to center the content. It's divided into four main sections:
+
+1.  **Header**: Displays my name, "Saad Alam," and my title, "Physics Student at TUM (M.Sc.)."
+2.  **About Me (`#about`)**: A brief introduction about myself and a button to download my CV.
+3.  **Projects (`#projects`)**: A section to showcase my projects. The projects are dynamically loaded from the `script.js` file.
+4.  **Contact (`#contact`)**: Contains links to my social media profiles (X, GitHub, LinkedIn) and my email address.
+
+At the end of the body, the `script.js` file is included to add interactivity.
+
+## CSS (`style.css`)
+
+The `style.css` file is responsible for the visual design of the website. It uses a dark theme and a monospaced font (`Fira Code`) for a clean, modern look.
+
+### Key Features
+
+- **Dark Theme**: The background is a dark gray (`#1a1a1a`) and the text is a light gray (`#f0f0f0`).
+- **Responsive Design**: Uses media queries to adjust the layout for smaller screens (e.g., mobile devices).
+- **Animations**: Includes subtle animations like fade-ins and slide-ins to make the user experience more engaging.
+- **Project Cards**: The project cards have a hover effect that makes them lift up and change color.
+- **CV Download Button**: The download button has a distinct style and a hover effect.
+
+## JavaScript (`script.js`)
+
+The `script.js` file adds dynamic behavior to the website. It runs after the HTML document has been fully loaded (`DOMContentLoaded` event).
+
+### Functionality
+
+- **Dynamic Project Loading**: It defines an array of project objects, each with a `title`, `description`, and `link`. It then iterates over this array and creates a "project card" for each project, which is then appended to the project grid in the HTML. This makes it easy to add, remove, or update projects without having to modify the HTML directly.
+
+## Icons
+
+The `icons/` directory contains SVG (Scalable Vector Graphics) files for the social media links in the contact section. SVGs are used because they are lightweight and can be scaled to any size without losing quality.
