@@ -105,7 +105,7 @@ export default function Home() {
               I am a 22-year-old Physics student at the Technical University of Munich, currently pursuing my Master&apos;s degree. My primary interests lie in Artificial Intelligence and Machine Learning.
             </p>
             <motion.a
-              href="/LebenslaufSaadAlam2025.pdf"
+              href="./LebenslaufSaadAlam2025.pdf"
               download
               className="inline-flex items-center gap-2 px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-medium transition-all duration-300 shadow-md hover:shadow-lg"
               whileHover={{ scale: 1.02 }}
