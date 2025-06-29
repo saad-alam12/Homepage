@@ -1,8 +1,10 @@
 'use client'
 
-import { motion, Variants } from 'framer-motion'
+import { motion, Variants, useInView } from 'framer-motion'
 import { ThemeToggle } from '@/components/theme-toggle'
+import { FloatingNav } from '@/components/floating-nav'
 import { Download, Mail, Github, Linkedin, Twitter } from 'lucide-react'
+import { useRef, useState, useEffect } from 'react'
 
 const projects = [
   {
@@ -27,13 +29,20 @@ const projects = [
   }
 ]
 
+// Enhanced page container with sophisticated entrance
 const containerVariants: Variants = {
-  hidden: { opacity: 0 },
+  hidden: { 
+    opacity: 0,
+    y: 20
+  },
   visible: {
     opacity: 1,
+    y: 0,
     transition: {
-      staggerChildren: 0.2,
-      delayChildren: 0.1
+      duration: 0.8,
+      ease: "easeOut",
+      staggerChildren: 0.15,
+      delayChildren: 0.2
     }
   }
 }
@@ -62,12 +71,82 @@ const titleVariants: Variants = {
   }
 }
 
+// Scroll-triggered animation variants
+const scrollVariants: Variants = {
+  hidden: { 
+    opacity: 0, 
+    y: 50,
+    scale: 0.95
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.6,
+      ease: "easeOut"
+    }
+  }
+}
+
+// Typewriter effect component
+function TypewriterText({ text, delay = 0 }: { text: string; delay?: number }) {
+  const [displayText, setDisplayText] = useState('')
+  const [showCursor, setShowCursor] = useState(true)
+
+  useEffect(() => {
+    let timeoutId: NodeJS.Timeout
+
+    const startTyping = () => {
+      for (let i = 0; i <= text.length; i++) {
+        timeoutId = setTimeout(() => {
+          setDisplayText(text.slice(0, i))
+          if (i === text.length) {
+            setShowCursor(true)
+          }
+        }, delay + i * 100)
+      }
+    }
+
+    startTyping()
+
+    return () => clearTimeout(timeoutId)
+  }, [text, delay])
+
+  return (
+    <>
+      {displayText}
+      {showCursor && (
+        <motion.span
+          className="inline-block w-0.5 h-[0.8em] bg-purple-600 ml-1"
+          animate={{ opacity: [1, 0] }}
+          transition={{ duration: 0.8, repeat: Infinity, repeatType: "reverse" }}
+        >
+          |
+        </motion.span>
+      )}
+    </>
+  )
+}
+
 export default function Home() {
+  // Refs for scroll-triggered animations
+  const aboutRef = useRef(null)
+  const projectsRef = useRef(null)
+  const contactRef = useRef(null)
+  
+  // Hook to detect when elements are in view
+  const aboutInView = useInView(aboutRef, { once: true, margin: "-100px" })
+  const projectsInView = useInView(projectsRef, { once: true, margin: "-100px" })
+  const contactInView = useInView(contactRef, { once: true, margin: "-100px" })
+
   return (
     <div className="min-h-screen bg-white dark:bg-black text-black dark:text-white transition-colors duration-300">
       <ThemeToggle />
+      <FloatingNav />
       
       <motion.div
+        id="home"
         className="container mx-auto px-6 py-8 max-w-4xl"
         variants={containerVariants}
         initial="hidden"
@@ -79,61 +158,103 @@ export default function Home() {
           variants={itemVariants}
         >
           <motion.h1 
-            className="text-5xl md:text-6xl font-bold mb-4 text-purple-600"
+            className="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-purple-600 via-purple-500 to-purple-700 bg-clip-text text-transparent"
             variants={titleVariants}
           >
-            Saad Alam
+            <TypewriterText text="Saad Alam" delay={500} />
           </motion.h1>
           <motion.p 
-            className="text-xl text-black dark:text-white"
+            className="text-xl bg-gradient-to-r from-black via-purple-600 to-black dark:from-white dark:via-purple-400 dark:to-white bg-clip-text text-transparent animate-pulse"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.5, duration: 0.6 }}
+            transition={{ delay: 2, duration: 0.6 }}
           >
-            Physics Student at TUM (M.Sc.)
+            <TypewriterText text="Physics Student at TUM (M.Sc.)" delay={2000} />
           </motion.p>
         </motion.header>
 
         {/* About Section */}
         <motion.section 
+          id="about"
+          ref={aboutRef}
           className="mb-16"
-          variants={itemVariants}
+          variants={scrollVariants}
+          initial="hidden"
+          animate={aboutInView ? "visible" : "hidden"}
         >
-          <h2 className="text-3xl font-semibold mb-6 text-center">About Me</h2>
-          <div className="bg-white dark:bg-black rounded-xl p-8 border border-black dark:border-white">
+          <motion.h2 
+            className="text-3xl font-semibold mb-6 text-center bg-gradient-to-r from-black via-purple-600 to-black dark:from-white dark:via-purple-400 dark:to-white bg-clip-text text-transparent"
+            whileInView={{ 
+              backgroundSize: ["100% 100%", "200% 100%", "100% 100%"],
+              transition: { duration: 2, ease: "easeInOut" }
+            }}
+          >
+            About Me
+          </motion.h2>
+          <motion.div 
+            className="relative bg-white/30 dark:bg-black/30 backdrop-blur-lg rounded-xl p-8 border border-white/30 dark:border-white/20 shadow-2xl before:absolute before:inset-0 before:rounded-xl before:bg-gradient-to-br before:from-white/20 before:to-transparent before:pointer-events-none"
+            whileHover={{
+              rotateX: 2,
+              rotateY: 2,
+              scale: 1.01,
+              transition: { duration: 0.3, ease: "easeOut" }
+            }}
+            style={{ transformStyle: "preserve-3d" }}
+          >
             <p className="text-lg leading-relaxed mb-8 text-black dark:text-white">
               I am a 22-year-old Physics student at the Technical University of Munich, currently pursuing my Master&apos;s degree. My primary interests lie in Artificial Intelligence and Machine Learning.
             </p>
             <div className="flex justify-center">
               <motion.a
-                href="/Homepage/LebenslaufSaadAlam2025.pdf"
+                href="/LebenslaufSaadAlam2025.pdf"
                 download
                 className="inline-flex items-center gap-2 px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-medium transition-all duration-300 shadow-md hover:shadow-lg"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+                whileHover={{ 
+                  scale: 1.05,
+                  boxShadow: "0 10px 25px rgba(124, 58, 237, 0.4)",
+                  transition: { duration: 0.2 }
+                }}
+                whileTap={{ 
+                  scale: 0.95,
+                  transition: { duration: 0.1 }
+                }}
               >
                 <Download className="w-4 h-4" />
                 Download CV
               </motion.a>
             </div>
-          </div>
+          </motion.div>
         </motion.section>
 
         {/* Projects Section */}
         <motion.section 
+          id="projects"
+          ref={projectsRef}
           className="mb-16"
-          variants={itemVariants}
+          variants={scrollVariants}
+          initial="hidden"
+          animate={projectsInView ? "visible" : "hidden"}
         >
-          <h2 className="text-3xl font-semibold mb-8 text-center">Projects</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <motion.h2 
+            className="text-3xl font-semibold mb-8 text-center bg-gradient-to-r from-black via-purple-600 to-black dark:from-white dark:via-purple-400 dark:to-white bg-clip-text text-transparent"
+            whileInView={{ 
+              backgroundSize: ["100% 100%", "200% 100%", "100% 100%"],
+              transition: { duration: 2, ease: "easeInOut" }
+            }}
+          >
+            Projects
+          </motion.h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 perspective-container">
             {projects.map((project, index) => (
               <motion.div
                 key={project.title}
-                className="bg-white dark:bg-black rounded-xl p-6 border border-black dark:border-white hover:border-purple-600 transition-all duration-300"
-                whileHover={{ 
-                  y: -5,
-                  transition: { duration: 0.2 }
+                className="relative bg-white/20 dark:bg-black/20 backdrop-blur-xl rounded-xl p-6 border border-white/40 dark:border-white/30 hover:border-purple-400/70 hover:bg-white/30 dark:hover:bg-black/30 transition-all duration-300 shadow-2xl hover:shadow-purple-500/20 before:absolute before:inset-0 before:rounded-xl before:bg-gradient-to-br before:from-white/30 before:via-white/10 before:to-transparent before:pointer-events-none"
+                whileHover={{
+                  y: -8,
+                  scale: 1.02,
+                  transition: { duration: 0.2, ease: "easeOut" }
                 }}
+                style={{ transformStyle: "preserve-3d" }}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 * index, duration: 0.6 }}
@@ -144,12 +265,16 @@ export default function Home() {
                 <p className="text-black dark:text-white mb-4">
                   {project.description}
                 </p>
-                <a
+                <motion.a
                   href={project.link}
                   className="inline-flex items-center text-purple-600 hover:text-purple-700 font-medium transition-colors duration-200"
+                  whileHover={{ 
+                    x: 5,
+                    transition: { duration: 0.2 }
+                  }}
                 >
                   View Project →
-                </a>
+                </motion.a>
               </motion.div>
             ))}
           </div>
@@ -157,17 +282,34 @@ export default function Home() {
 
         {/* Contact Section */}
         <motion.section
-          variants={itemVariants}
+          id="contact"
+          ref={contactRef}
+          variants={scrollVariants}
+          initial="hidden"
+          animate={contactInView ? "visible" : "hidden"}
         >
-          <h2 className="text-3xl font-semibold mb-8 text-center">Contact</h2>
+          <motion.h2 
+            className="text-3xl font-semibold mb-8 text-center bg-gradient-to-r from-black via-purple-600 to-black dark:from-white dark:via-purple-400 dark:to-white bg-clip-text text-transparent"
+            whileInView={{ 
+              backgroundSize: ["100% 100%", "200% 100%", "100% 100%"],
+              transition: { duration: 2, ease: "easeInOut" }
+            }}
+          >
+            Contact
+          </motion.h2>
           <div className="flex justify-center gap-8 flex-wrap">
             <motion.a
               href="https://x.com/SaadAlm___"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center w-14 h-14 bg-white dark:bg-black rounded-full transition-all duration-300 border border-black dark:border-white hover:border-purple-600"
-              whileHover={{ scale: 1.1, rotate: 5 }}
-              whileTap={{ scale: 0.95 }}
+              className="flex items-center justify-center w-14 h-14 bg-white/30 dark:bg-black/30 backdrop-blur-xl rounded-full transition-all duration-300 border border-white/50 dark:border-white/40 hover:border-purple-400/70 hover:bg-white/40 dark:hover:bg-black/40 shadow-2xl hover:shadow-purple-500/30 relative before:absolute before:inset-0 before:rounded-full before:bg-gradient-to-br before:from-white/40 before:to-transparent before:pointer-events-none"
+              whileHover={{ 
+                scale: 1.15, 
+                rotate: 8,
+                boxShadow: "0 5px 15px rgba(124, 58, 237, 0.3)",
+                transition: { duration: 0.2 }
+              }}
+              whileTap={{ scale: 0.9 }}
             >
               <Twitter className="w-6 h-6 text-purple-600" />
             </motion.a>
@@ -176,18 +318,28 @@ export default function Home() {
               href="https://github.com/saad-alam12"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center w-14 h-14 bg-white dark:bg-black rounded-full transition-all duration-300 border border-black dark:border-white hover:border-purple-600"
-              whileHover={{ scale: 1.1, rotate: -5 }}
-              whileTap={{ scale: 0.95 }}
+              className="flex items-center justify-center w-14 h-14 bg-white/30 dark:bg-black/30 backdrop-blur-xl rounded-full transition-all duration-300 border border-white/50 dark:border-white/40 hover:border-purple-400/70 hover:bg-white/40 dark:hover:bg-black/40 shadow-2xl hover:shadow-purple-500/30 relative before:absolute before:inset-0 before:rounded-full before:bg-gradient-to-br before:from-white/40 before:to-transparent before:pointer-events-none"
+              whileHover={{ 
+                scale: 1.15, 
+                rotate: -8,
+                boxShadow: "0 5px 15px rgba(124, 58, 237, 0.3)",
+                transition: { duration: 0.2 }
+              }}
+              whileTap={{ scale: 0.9 }}
             >
               <Github className="w-6 h-6 text-purple-600" />
             </motion.a>
             
             <motion.a
               href="mailto:saad.alam@gmx.de"
-              className="flex items-center justify-center w-14 h-14 bg-white dark:bg-black rounded-full transition-all duration-300 border border-black dark:border-white hover:border-purple-600"
-              whileHover={{ scale: 1.1, rotate: 5 }}
-              whileTap={{ scale: 0.95 }}
+              className="flex items-center justify-center w-14 h-14 bg-white/30 dark:bg-black/30 backdrop-blur-xl rounded-full transition-all duration-300 border border-white/50 dark:border-white/40 hover:border-purple-400/70 hover:bg-white/40 dark:hover:bg-black/40 shadow-2xl hover:shadow-purple-500/30 relative before:absolute before:inset-0 before:rounded-full before:bg-gradient-to-br before:from-white/40 before:to-transparent before:pointer-events-none"
+              whileHover={{ 
+                scale: 1.15, 
+                rotate: 8,
+                boxShadow: "0 5px 15px rgba(124, 58, 237, 0.3)",
+                transition: { duration: 0.2 }
+              }}
+              whileTap={{ scale: 0.9 }}
             >
               <Mail className="w-6 h-6 text-purple-600" />
             </motion.a>
@@ -196,9 +348,14 @@ export default function Home() {
               href="https://www.linkedin.com/in/saad-alam-3a49491b4"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center w-14 h-14 bg-white dark:bg-black rounded-full transition-all duration-300 border border-black dark:border-white hover:border-purple-600"
-              whileHover={{ scale: 1.1, rotate: -5 }}
-              whileTap={{ scale: 0.95 }}
+              className="flex items-center justify-center w-14 h-14 bg-white/30 dark:bg-black/30 backdrop-blur-xl rounded-full transition-all duration-300 border border-white/50 dark:border-white/40 hover:border-purple-400/70 hover:bg-white/40 dark:hover:bg-black/40 shadow-2xl hover:shadow-purple-500/30 relative before:absolute before:inset-0 before:rounded-full before:bg-gradient-to-br before:from-white/40 before:to-transparent before:pointer-events-none"
+              whileHover={{ 
+                scale: 1.15, 
+                rotate: -8,
+                boxShadow: "0 5px 15px rgba(124, 58, 237, 0.3)",
+                transition: { duration: 0.2 }
+              }}
+              whileTap={{ scale: 0.9 }}
             >
               <Linkedin className="w-6 h-6 text-purple-600" />
             </motion.a>

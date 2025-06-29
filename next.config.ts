@@ -4,8 +4,9 @@ const nextConfig: NextConfig = {
   output: 'export',
   trailingSlash: true,
   distDir: 'out',
-  basePath: '/Homepage',
-  assetPrefix: '/Homepage',
+  // Comment out for local development, uncomment for GitHub Pages
+  // basePath: '/Homepage',
+  // assetPrefix: '/Homepage',
   images: {
     unoptimized: true
   }

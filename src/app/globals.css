@@ -43,6 +43,20 @@ body {
   font-family: var(--font-fira-code);
   animation: fadeIn 1s ease-in forwards;
   transition: background-color 0.3s ease, color 0.3s ease;
+  cursor: auto;
+  background-image: 
+    radial-gradient(circle at 20% 20%, rgba(124, 58, 237, 0.15) 0%, transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(124, 58, 237, 0.1) 0%, transparent 40%),
+    radial-gradient(circle at 50% 10%, rgba(124, 58, 237, 0.08) 0%, transparent 30%),
+    radial-gradient(circle at 90% 40%, rgba(124, 58, 237, 0.12) 0%, transparent 35%),
+    linear-gradient(45deg, transparent 40%, rgba(124, 58, 237, 0.03) 50%, transparent 60%);
+  background-size: 100% 100%, 100% 100%, 80% 80%, 60% 60%, 100% 100%;
+  background-attachment: fixed;
+}
+
+/* Ensure cursor is visible on all elements */
+* {
+  cursor: inherit;
 }
 
 /* Custom scrollbar */
@@ -70,4 +84,9 @@ body {
 /* Focus styles */
 *:focus-visible {
   @apply outline-2 outline-offset-2 outline-purple-600 rounded-sm;
+}
+
+/* 3D perspective for hover effects */
+.perspective-container {
+  perspective: 1000px;
 }
