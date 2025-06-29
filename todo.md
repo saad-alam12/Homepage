@@ -1,1 +1,0 @@
-- [x] Fix hydration error and theme toggle functionality.
