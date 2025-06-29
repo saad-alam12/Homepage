@@ -253,12 +253,12 @@ export default function Home() {
                 transition={{ delay: 0.2 * index, duration: 0.6 }}
               >
                 <motion.div
-                  className="relative bg-white/10 dark:bg-black/10 backdrop-blur-2xl rounded-xl p-6 border border-white/50 dark:border-white/40 shadow-2xl before:absolute before:inset-0 before:rounded-xl before:bg-gradient-to-br before:from-white/35 before:via-white/15 before:to-transparent before:pointer-events-none after:absolute after:inset-0 after:rounded-xl after:bg-gradient-to-t after:from-transparent after:via-white/8 after:to-white/15 after:pointer-events-none"
+                  className="relative bg-white/15 dark:bg-black/15 backdrop-blur-2xl rounded-xl p-6 border border-white/40 dark:border-white/30 shadow-2xl before:absolute before:inset-0 before:rounded-xl before:bg-gradient-to-br before:from-white/25 before:via-white/10 before:to-transparent before:pointer-events-none after:absolute after:inset-0 after:rounded-xl after:bg-gradient-to-t after:from-transparent after:via-white/5 after:to-white/10 after:pointer-events-none"
                   whileHover={{
                     y: -8,
                     scale: 1.02,
-                    borderColor: "rgba(168, 85, 247, 0.8)",
-                    backgroundColor: "rgba(255, 255, 255, 0.2)",
+                    borderColor: "rgba(168, 85, 247, 0.6)",
+                    backgroundColor: "rgba(255, 255, 255, 0.25)",
                     boxShadow: "0 25px 50px -12px rgba(124, 58, 237, 0.3)",
                     transition: { duration: 0.2, ease: "easeOut" }
                   }}
