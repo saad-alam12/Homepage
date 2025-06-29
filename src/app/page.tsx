@@ -192,7 +192,7 @@ export default function Home() {
             About Me
           </motion.h2>
           <motion.div 
-            className="relative bg-white/30 dark:bg-black/30 backdrop-blur-lg rounded-xl p-8 border border-white/30 dark:border-white/20 shadow-2xl before:absolute before:inset-0 before:rounded-xl before:bg-gradient-to-br before:from-white/20 before:to-transparent before:pointer-events-none"
+            className="relative bg-white/15 dark:bg-black/15 backdrop-blur-xl rounded-xl p-8 border border-white/40 dark:border-white/30 shadow-2xl before:absolute before:inset-0 before:rounded-xl before:bg-gradient-to-br before:from-white/25 before:via-white/10 before:to-transparent before:pointer-events-none after:absolute after:inset-0 after:rounded-xl after:bg-gradient-to-t after:from-transparent after:via-white/5 after:to-white/10 after:pointer-events-none"
             whileHover={{
               rotateX: 2,
               rotateY: 2,
@@ -248,17 +248,22 @@ export default function Home() {
             {projects.map((project, index) => (
               <motion.div
                 key={project.title}
-                className="relative bg-white/20 dark:bg-black/20 backdrop-blur-xl rounded-xl p-6 border border-white/40 dark:border-white/30 hover:border-purple-400/70 hover:bg-white/30 dark:hover:bg-black/30 transition-all duration-300 shadow-2xl hover:shadow-purple-500/20 before:absolute before:inset-0 before:rounded-xl before:bg-gradient-to-br before:from-white/30 before:via-white/10 before:to-transparent before:pointer-events-none"
-                whileHover={{
-                  y: -8,
-                  scale: 1.02,
-                  transition: { duration: 0.2, ease: "easeOut" }
-                }}
-                style={{ transformStyle: "preserve-3d" }}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 * index, duration: 0.6 }}
               >
+                <motion.div
+                  className="relative bg-white/10 dark:bg-black/10 backdrop-blur-2xl rounded-xl p-6 border border-white/50 dark:border-white/40 shadow-2xl before:absolute before:inset-0 before:rounded-xl before:bg-gradient-to-br before:from-white/35 before:via-white/15 before:to-transparent before:pointer-events-none after:absolute after:inset-0 after:rounded-xl after:bg-gradient-to-t after:from-transparent after:via-white/8 after:to-white/15 after:pointer-events-none"
+                  whileHover={{
+                    y: -8,
+                    scale: 1.02,
+                    borderColor: "rgba(168, 85, 247, 0.8)",
+                    backgroundColor: "rgba(255, 255, 255, 0.2)",
+                    boxShadow: "0 25px 50px -12px rgba(124, 58, 237, 0.3)",
+                    transition: { duration: 0.2, ease: "easeOut" }
+                  }}
+                  style={{ transformStyle: "preserve-3d" }}
+                >
                 <h3 className="text-xl font-semibold mb-3 text-black dark:text-white">
                   {project.title}
                 </h3>
@@ -275,6 +280,7 @@ export default function Home() {
                 >
                   View Project →
                 </motion.a>
+                </motion.div>
               </motion.div>
             ))}
           </div>
@@ -302,7 +308,7 @@ export default function Home() {
               href="https://x.com/SaadAlm___"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center w-14 h-14 bg-white/30 dark:bg-black/30 backdrop-blur-xl rounded-full transition-all duration-300 border border-white/50 dark:border-white/40 hover:border-purple-400/70 hover:bg-white/40 dark:hover:bg-black/40 shadow-2xl hover:shadow-purple-500/30 relative before:absolute before:inset-0 before:rounded-full before:bg-gradient-to-br before:from-white/40 before:to-transparent before:pointer-events-none"
+              className="flex items-center justify-center w-14 h-14 bg-white/15 dark:bg-black/15 backdrop-blur-2xl rounded-full transition-all duration-300 border border-white/60 dark:border-white/50 hover:border-purple-400/80 hover:bg-white/25 dark:hover:bg-black/25 shadow-2xl hover:shadow-purple-500/40 relative before:absolute before:inset-0 before:rounded-full before:bg-gradient-to-br before:from-white/50 before:via-white/20 before:to-transparent before:pointer-events-none after:absolute after:inset-0 after:rounded-full after:bg-gradient-to-t after:from-transparent after:via-white/10 after:to-white/20 after:pointer-events-none"
               whileHover={{ 
                 scale: 1.15, 
                 rotate: 8,
@@ -318,7 +324,7 @@ export default function Home() {
               href="https://github.com/saad-alam12"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center w-14 h-14 bg-white/30 dark:bg-black/30 backdrop-blur-xl rounded-full transition-all duration-300 border border-white/50 dark:border-white/40 hover:border-purple-400/70 hover:bg-white/40 dark:hover:bg-black/40 shadow-2xl hover:shadow-purple-500/30 relative before:absolute before:inset-0 before:rounded-full before:bg-gradient-to-br before:from-white/40 before:to-transparent before:pointer-events-none"
+              className="flex items-center justify-center w-14 h-14 bg-white/15 dark:bg-black/15 backdrop-blur-2xl rounded-full transition-all duration-300 border border-white/60 dark:border-white/50 hover:border-purple-400/80 hover:bg-white/25 dark:hover:bg-black/25 shadow-2xl hover:shadow-purple-500/40 relative before:absolute before:inset-0 before:rounded-full before:bg-gradient-to-br before:from-white/50 before:via-white/20 before:to-transparent before:pointer-events-none after:absolute after:inset-0 after:rounded-full after:bg-gradient-to-t after:from-transparent after:via-white/10 after:to-white/20 after:pointer-events-none"
               whileHover={{ 
                 scale: 1.15, 
                 rotate: -8,
@@ -332,7 +338,7 @@ export default function Home() {
             
             <motion.a
               href="mailto:saad.alam@gmx.de"
-              className="flex items-center justify-center w-14 h-14 bg-white/30 dark:bg-black/30 backdrop-blur-xl rounded-full transition-all duration-300 border border-white/50 dark:border-white/40 hover:border-purple-400/70 hover:bg-white/40 dark:hover:bg-black/40 shadow-2xl hover:shadow-purple-500/30 relative before:absolute before:inset-0 before:rounded-full before:bg-gradient-to-br before:from-white/40 before:to-transparent before:pointer-events-none"
+              className="flex items-center justify-center w-14 h-14 bg-white/15 dark:bg-black/15 backdrop-blur-2xl rounded-full transition-all duration-300 border border-white/60 dark:border-white/50 hover:border-purple-400/80 hover:bg-white/25 dark:hover:bg-black/25 shadow-2xl hover:shadow-purple-500/40 relative before:absolute before:inset-0 before:rounded-full before:bg-gradient-to-br before:from-white/50 before:via-white/20 before:to-transparent before:pointer-events-none after:absolute after:inset-0 after:rounded-full after:bg-gradient-to-t after:from-transparent after:via-white/10 after:to-white/20 after:pointer-events-none"
               whileHover={{ 
                 scale: 1.15, 
                 rotate: 8,
@@ -348,7 +354,7 @@ export default function Home() {
               href="https://www.linkedin.com/in/saad-alam-3a49491b4"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center w-14 h-14 bg-white/30 dark:bg-black/30 backdrop-blur-xl rounded-full transition-all duration-300 border border-white/50 dark:border-white/40 hover:border-purple-400/70 hover:bg-white/40 dark:hover:bg-black/40 shadow-2xl hover:shadow-purple-500/30 relative before:absolute before:inset-0 before:rounded-full before:bg-gradient-to-br before:from-white/40 before:to-transparent before:pointer-events-none"
+              className="flex items-center justify-center w-14 h-14 bg-white/15 dark:bg-black/15 backdrop-blur-2xl rounded-full transition-all duration-300 border border-white/60 dark:border-white/50 hover:border-purple-400/80 hover:bg-white/25 dark:hover:bg-black/25 shadow-2xl hover:shadow-purple-500/40 relative before:absolute before:inset-0 before:rounded-full before:bg-gradient-to-br before:from-white/50 before:via-white/20 before:to-transparent before:pointer-events-none after:absolute after:inset-0 after:rounded-full after:bg-gradient-to-t after:from-transparent after:via-white/10 after:to-white/20 after:pointer-events-none"
               whileHover={{ 
                 scale: 1.15, 
                 rotate: -8,

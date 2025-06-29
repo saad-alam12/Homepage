@@ -29,7 +29,7 @@ export function FloatingNav() {
 
   return (
     <motion.nav
-      className="fixed top-8 left-1/2 z-50 flex items-center gap-2 px-4 py-3 bg-white/10 dark:bg-black/10 backdrop-blur-md rounded-full border border-white/20 dark:border-white/15 shadow-lg"
+      className="fixed top-8 left-1/2 z-50 flex items-center gap-2 px-4 py-3 bg-white/8 dark:bg-black/8 backdrop-blur-2xl rounded-full border border-white/30 dark:border-white/25 shadow-2xl"
       initial={{ opacity: 0, y: -100, x: '-50%' }}
       animate={{ 
         opacity: isVisible ? 1 : 0, 
@@ -45,7 +45,7 @@ export function FloatingNav() {
           <motion.button
             key={item.id}
             onClick={() => scrollToSection(item.id)}
-            className="flex items-center justify-center w-12 h-12 rounded-full bg-white/20 dark:bg-black/20 backdrop-blur-md border border-white/30 dark:border-white/25 hover:border-purple-400/50 hover:bg-white/30 dark:hover:bg-black/30 transition-all duration-200 group"
+            className="flex items-center justify-center w-12 h-12 rounded-full bg-white/15 dark:bg-black/15 backdrop-blur-xl border border-white/40 dark:border-white/35 hover:border-purple-400/70 hover:bg-white/25 dark:hover:bg-black/25 transition-all duration-200 group relative before:absolute before:inset-0 before:rounded-full before:bg-gradient-to-br before:from-white/30 before:to-transparent before:pointer-events-none"
             whileHover={{ 
               scale: 1.1,
               backgroundColor: 'rgba(255, 255, 255, 0.4)'
