@@ -1,373 +1,220 @@
 'use client'
 
-import { motion, Variants, useInView } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { FloatingNav } from '@/components/floating-nav'
-import { Download, Mail, Github, Linkedin, Twitter } from 'lucide-react'
-import { useRef, useState, useEffect } from 'react'
+import { Download, Mail, Github, Linkedin, FileText, ChevronRight } from 'lucide-react'
 
-const projects = [
-  {
-    title: 'Project 1',
-    description: 'A brief description of your first project.',
-    link: '#'
-  },
-  {
-    title: 'Project 2',
-    description: 'A brief description of your second project.',
-    link: '#'
-  },
-  {
-    title: 'Project 3',
-    description: 'A brief description of your third project.',
-    link: '#'
-  },
-  {
-    title: 'Project 4',
-    description: 'A brief description of your fourth project.',
-    link: '#'
-  }
-]
-
-// Enhanced page container with sophisticated entrance
-const containerVariants: Variants = {
-  hidden: { 
-    opacity: 0,
-    y: 20
-  },
+// Professional, subtle animations
+const fadeIn = {
+  hidden: { opacity: 0, y: 10 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: {
-      duration: 0.8,
-      ease: "easeOut",
-      staggerChildren: 0.15,
-      delayChildren: 0.2
-    }
+    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const }
   }
 }
 
-const itemVariants: Variants = {
-  hidden: { y: 20, opacity: 0 },
+const stagger = {
   visible: {
-    y: 0,
-    opacity: 1,
     transition: {
-      duration: 0.6,
-      ease: "easeOut"
+      staggerChildren: 0.1
     }
   }
-}
-
-const titleVariants: Variants = {
-  hidden: { x: -100, opacity: 0 },
-  visible: {
-    x: 0,
-    opacity: 1,
-    transition: {
-      duration: 0.8,
-      ease: "easeOut"
-    }
-  }
-}
-
-// Scroll-triggered animation variants
-const scrollVariants: Variants = {
-  hidden: { 
-    opacity: 0, 
-    y: 50,
-    scale: 0.95
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: {
-      duration: 0.6,
-      ease: "easeOut"
-    }
-  }
-}
-
-// Typewriter effect component
-function TypewriterText({ text, delay = 0 }: { text: string; delay?: number }) {
-  const [displayText, setDisplayText] = useState('')
-  const [showCursor, setShowCursor] = useState(true)
-
-  useEffect(() => {
-    let timeoutId: NodeJS.Timeout
-
-    const startTyping = () => {
-      for (let i = 0; i <= text.length; i++) {
-        timeoutId = setTimeout(() => {
-          setDisplayText(text.slice(0, i))
-          if (i === text.length) {
-            setShowCursor(true)
-          }
-        }, delay + i * 100)
-      }
-    }
-
-    startTyping()
-
-    return () => clearTimeout(timeoutId)
-  }, [text, delay])
-
-  return (
-    <>
-      {displayText}
-      {showCursor && (
-        <motion.span
-          className="inline-block w-0.5 h-[0.8em] bg-purple-600 ml-1"
-          animate={{ opacity: [1, 0] }}
-          transition={{ duration: 0.8, repeat: Infinity, repeatType: "reverse" }}
-        >
-          |
-        </motion.span>
-      )}
-    </>
-  )
 }
 
 export default function Home() {
-  // Refs for scroll-triggered animations
-  const aboutRef = useRef(null)
-  const projectsRef = useRef(null)
-  const contactRef = useRef(null)
-  
-  // Hook to detect when elements are in view
-  const aboutInView = useInView(aboutRef, { once: true, margin: "-100px" })
-  const projectsInView = useInView(projectsRef, { once: true, margin: "-100px" })
-  const contactInView = useInView(contactRef, { once: true, margin: "-100px" })
-
   return (
-    <div className="min-h-screen bg-white dark:bg-black text-black dark:text-white transition-colors duration-300">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 selection:bg-blue-100 dark:selection:bg-blue-900/30">
       <ThemeToggle />
       <FloatingNav />
-      
-      <motion.div
-        id="home"
-        className="container mx-auto px-6 py-8 max-w-4xl"
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        {/* Header */}
-        <motion.header 
-          className="text-center mb-16"
-          variants={itemVariants}
+
+      <main className="container mx-auto px-6 py-12 max-w-5xl">
+        {/* Header / Hero */}
+        <motion.header
+          initial="hidden"
+          animate="visible"
+          variants={stagger}
+          className="mt-16 mb-24 space-y-6"
         >
-          <motion.h1 
-            className="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-purple-600 via-purple-500 to-purple-700 bg-clip-text text-transparent"
-            variants={titleVariants}
-          >
-            <TypewriterText text="Saad Alam" delay={500} />
-          </motion.h1>
-          <motion.p 
-            className="text-xl bg-gradient-to-r from-black via-purple-600 to-black dark:from-white dark:via-purple-400 dark:to-white bg-clip-text text-transparent animate-pulse"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 2, duration: 0.6 }}
-          >
-            <TypewriterText text="Physics Student at TUM (M.Sc.)" delay={2000} />
+          <motion.div variants={fadeIn}>
+            <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-slate-900 dark:text-white mb-2">
+              Saad Alam
+            </h1>
+            <p className="text-xl md:text-2xl text-slate-600 dark:text-slate-400 font-medium">
+              Physics M.Sc. Student at TUM | Aspiring Quantitative Researcher
+            </p>
+          </motion.div>
+
+          <motion.p variants={fadeIn} className="max-w-2xl text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
+            Specializing in statistical physics and reduced-order modeling.
+            Passionate about applying rigorous mathematical methods to solve complex problems in quantitative finance,
+            market risk management, and alpha research.
           </motion.p>
+
+          <motion.div variants={fadeIn} className="flex gap-4 pt-4">
+            <a
+              href="mailto:saad.alam@gmx.de"
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 rounded-md font-medium hover:bg-slate-800 dark:hover:bg-slate-200 transition-colors"
+            >
+              <Mail className="w-4 h-4" />
+              Contact Me
+            </a>
+            <a
+              href="LebenslaufSaadAlam2025.pdf"
+              target="_blank"
+              className="inline-flex items-center gap-2 px-5 py-2.5 border border-slate-300 dark:border-slate-700 rounded-md font-medium hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+            >
+              <Download className="w-4 h-4" />
+              CV
+            </a>
+          </motion.div>
         </motion.header>
 
-        {/* About Section */}
-        <motion.section 
-          id="about"
-          ref={aboutRef}
-          className="mb-16"
-          variants={scrollVariants}
-          initial="hidden"
-          animate={aboutInView ? "visible" : "hidden"}
-        >
-          <motion.h2 
-            className="text-3xl font-semibold mb-6 text-center bg-gradient-to-r from-black via-purple-600 to-black dark:from-white dark:via-purple-400 dark:to-white bg-clip-text text-transparent"
-            whileInView={{ 
-              backgroundSize: ["100% 100%", "200% 100%", "100% 100%"],
-              transition: { duration: 2, ease: "easeInOut" }
-            }}
-          >
-            About Me
-          </motion.h2>
-          <motion.div 
-            className="relative bg-white/15 dark:bg-black/15 backdrop-blur-xl rounded-xl p-8 border border-white/40 dark:border-white/30 shadow-2xl before:absolute before:inset-0 before:rounded-xl before:bg-gradient-to-br before:from-white/25 before:via-white/10 before:to-transparent before:pointer-events-none after:absolute after:inset-0 after:rounded-xl after:bg-gradient-to-t after:from-transparent after:via-white/5 after:to-white/10 after:pointer-events-none"
-            whileHover={{
-              rotateX: 2,
-              rotateY: 2,
-              scale: 1.01,
-              transition: { duration: 0.3, ease: "easeOut" }
-            }}
-            style={{ transformStyle: "preserve-3d" }}
-          >
-            <p className="text-lg leading-relaxed mb-8 text-black dark:text-white">
-              I am a 22-year-old Physics student at the Technical University of Munich, currently pursuing my Master&apos;s degree. My primary interests lie in Artificial Intelligence and Machine Learning.
-            </p>
-            <div className="flex justify-center">
-              <motion.a
-                href="/Homepage/LebenslaufSaadAlam2025.pdf"
-                download
-                className="inline-flex items-center gap-2 px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-medium transition-all duration-300 shadow-md hover:shadow-lg"
-                whileHover={{ 
-                  scale: 1.05,
-                  boxShadow: "0 10px 25px rgba(124, 58, 237, 0.4)",
-                  transition: { duration: 0.2 }
-                }}
-                whileTap={{ 
-                  scale: 0.95,
-                  transition: { duration: 0.1 }
-                }}
-              >
-                <Download className="w-4 h-4" />
-                Download CV
-              </motion.a>
-            </div>
-          </motion.div>
-        </motion.section>
-
-        {/* Projects Section */}
-        <motion.section 
-          id="projects"
-          ref={projectsRef}
-          className="mb-16"
-          variants={scrollVariants}
-          initial="hidden"
-          animate={projectsInView ? "visible" : "hidden"}
-        >
-          <motion.h2 
-            className="text-3xl font-semibold mb-8 text-center bg-gradient-to-r from-black via-purple-600 to-black dark:from-white dark:via-purple-400 dark:to-white bg-clip-text text-transparent"
-            whileInView={{ 
-              backgroundSize: ["100% 100%", "200% 100%", "100% 100%"],
-              transition: { duration: 2, ease: "easeInOut" }
-            }}
-          >
-            Projects
-          </motion.h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 perspective-container">
-            {projects.map((project, index) => (
-              <motion.div
-                key={project.title}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 * index, duration: 0.6 }}
-              >
-                <motion.div
-                  className="relative bg-white/15 dark:bg-black/15 backdrop-blur-2xl rounded-xl p-6 border border-white/40 dark:border-white/30 shadow-2xl before:absolute before:inset-0 before:rounded-xl before:bg-gradient-to-br before:from-white/25 before:via-white/10 before:to-transparent before:pointer-events-none after:absolute after:inset-0 after:rounded-xl after:bg-gradient-to-t after:from-transparent after:via-white/5 after:to-white/10 after:pointer-events-none"
-                  whileHover={{
-                    y: -8,
-                    scale: 1.02,
-                    borderColor: "rgba(168, 85, 247, 0.6)",
-                    backgroundColor: "rgba(255, 255, 255, 0.25)",
-                    boxShadow: "0 25px 50px -12px rgba(124, 58, 237, 0.3)",
-                    transition: { duration: 0.2, ease: "easeOut" }
-                  }}
-                  style={{ transformStyle: "preserve-3d" }}
-                >
-                <h3 className="text-xl font-semibold mb-3 text-black dark:text-white">
-                  {project.title}
-                </h3>
-                <p className="text-black dark:text-white mb-4">
-                  {project.description}
-                </p>
-                <motion.a
-                  href={project.link}
-                  className="inline-flex items-center text-purple-600 hover:text-purple-700 font-medium transition-colors duration-200"
-                  whileHover={{ 
-                    x: 5,
-                    transition: { duration: 0.2 }
-                  }}
-                >
-                  View Project →
-                </motion.a>
-                </motion.div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.section>
-
-        {/* Contact Section */}
+        {/* Bachelor Thesis Section - NEW */}
         <motion.section
-          id="contact"
-          ref={contactRef}
-          variants={scrollVariants}
           initial="hidden"
-          animate={contactInView ? "visible" : "hidden"}
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          variants={fadeIn}
+          className="mb-20"
         >
-          <motion.h2 
-            className="text-3xl font-semibold mb-8 text-center bg-gradient-to-r from-black via-purple-600 to-black dark:from-white dark:via-purple-400 dark:to-white bg-clip-text text-transparent"
-            whileInView={{ 
-              backgroundSize: ["100% 100%", "200% 100%", "100% 100%"],
-              transition: { duration: 2, ease: "easeInOut" }
-            }}
-          >
-            Contact
-          </motion.h2>
-          <div className="flex justify-center gap-8 flex-wrap">
-            <motion.a
-              href="https://x.com/SaadAlm___"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center w-14 h-14 bg-white/15 dark:bg-black/15 backdrop-blur-2xl rounded-full transition-all duration-300 border border-white/60 dark:border-white/50 hover:border-purple-400/80 hover:bg-white/25 dark:hover:bg-black/25 shadow-2xl hover:shadow-purple-500/40 relative before:absolute before:inset-0 before:rounded-full before:bg-gradient-to-br before:from-white/50 before:via-white/20 before:to-transparent before:pointer-events-none after:absolute after:inset-0 after:rounded-full after:bg-gradient-to-t after:from-transparent after:via-white/10 after:to-white/20 after:pointer-events-none"
-              whileHover={{ 
-                scale: 1.15, 
-                rotate: 8,
-                boxShadow: "0 5px 15px rgba(124, 58, 237, 0.3)",
-                transition: { duration: 0.2 }
-              }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <Twitter className="w-6 h-6 text-purple-600" />
-            </motion.a>
-            
-            <motion.a
-              href="https://github.com/saad-alam12"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center w-14 h-14 bg-white/15 dark:bg-black/15 backdrop-blur-2xl rounded-full transition-all duration-300 border border-white/60 dark:border-white/50 hover:border-purple-400/80 hover:bg-white/25 dark:hover:bg-black/25 shadow-2xl hover:shadow-purple-500/40 relative before:absolute before:inset-0 before:rounded-full before:bg-gradient-to-br before:from-white/50 before:via-white/20 before:to-transparent before:pointer-events-none after:absolute after:inset-0 after:rounded-full after:bg-gradient-to-t after:from-transparent after:via-white/10 after:to-white/20 after:pointer-events-none"
-              whileHover={{ 
-                scale: 1.15, 
-                rotate: -8,
-                boxShadow: "0 5px 15px rgba(124, 58, 237, 0.3)",
-                transition: { duration: 0.2 }
-              }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <Github className="w-6 h-6 text-purple-600" />
-            </motion.a>
-            
-            <motion.a
-              href="mailto:saad.alam@gmx.de"
-              className="flex items-center justify-center w-14 h-14 bg-white/15 dark:bg-black/15 backdrop-blur-2xl rounded-full transition-all duration-300 border border-white/60 dark:border-white/50 hover:border-purple-400/80 hover:bg-white/25 dark:hover:bg-black/25 shadow-2xl hover:shadow-purple-500/40 relative before:absolute before:inset-0 before:rounded-full before:bg-gradient-to-br before:from-white/50 before:via-white/20 before:to-transparent before:pointer-events-none after:absolute after:inset-0 after:rounded-full after:bg-gradient-to-t after:from-transparent after:via-white/10 after:to-white/20 after:pointer-events-none"
-              whileHover={{ 
-                scale: 1.15, 
-                rotate: 8,
-                boxShadow: "0 5px 15px rgba(124, 58, 237, 0.3)",
-                transition: { duration: 0.2 }
-              }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <Mail className="w-6 h-6 text-purple-600" />
-            </motion.a>
-            
-            <motion.a
-              href="https://www.linkedin.com/in/saad-alam-3a49491b4"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center w-14 h-14 bg-white/15 dark:bg-black/15 backdrop-blur-2xl rounded-full transition-all duration-300 border border-white/60 dark:border-white/50 hover:border-purple-400/80 hover:bg-white/25 dark:hover:bg-black/25 shadow-2xl hover:shadow-purple-500/40 relative before:absolute before:inset-0 before:rounded-full before:bg-gradient-to-br before:from-white/50 before:via-white/20 before:to-transparent before:pointer-events-none after:absolute after:inset-0 after:rounded-full after:bg-gradient-to-t after:from-transparent after:via-white/10 after:to-white/20 after:pointer-events-none"
-              whileHover={{ 
-                scale: 1.15, 
-                rotate: -8,
-                boxShadow: "0 5px 15px rgba(124, 58, 237, 0.3)",
-                transition: { duration: 0.2 }
-              }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <Linkedin className="w-6 h-6 text-purple-600" />
-            </motion.a>
+          <div className="flex items-center gap-3 mb-6">
+            <FileText className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+            <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Bachelor Thesis</h2>
+          </div>
+
+          <div className="bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-lg p-6 md:p-8 shadow-sm hover:shadow-md transition-shadow">
+            <h3 className="text-xl font-semibold mb-3">
+              Investigating the Validity of the Ginzburg-Landau Theory for the 2D Ising Model
+            </h3>
+            <p className="text-slate-600 dark:text-slate-400 mb-6 leading-relaxed">
+              Explored the applicability of Ginzburg-Landau mean-field theory to the two-dimensional Ising model near critical points.
+              Utilized Monte Carlo simulations to analyze phase transitions and comparing theoretical predictions with numerical data.
+              The study provided insights into the limitations of mean-field approximations in low-dimensional systems.
+            </p>
+            <div className="flex flex-wrap gap-3">
+              <span className="px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-full text-sm font-medium text-slate-600 dark:text-slate-300">Statistical Physics</span>
+              <span className="px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-full text-sm font-medium text-slate-600 dark:text-slate-300">Monte Carlo Simulations</span>
+              <span className="px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-full text-sm font-medium text-slate-600 dark:text-slate-300">Python/C++</span>
+            </div>
+            <div className="mt-6">
+              <a
+                href="BA_SaadAlam.pdf"
+                target="_blank"
+                className="inline-flex items-center text-blue-600 dark:text-blue-400 font-medium hover:underline underline-offset-4"
+              >
+                Read Full Thesis (PDF) <ChevronRight className="w-4 h-4 ml-1" />
+              </a>
+            </div>
           </div>
         </motion.section>
-      </motion.div>
+
+        {/* Skills Section - NEW */}
+        <motion.section
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          variants={fadeIn}
+          className="mb-20"
+        >
+          <h2 className="text-2xl font-bold mb-6 text-slate-900 dark:text-white">Technical Skills</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="p-5 bg-white dark:bg-slate-900/30 border border-slate-200 dark:border-slate-800 rounded-lg">
+              <h3 className="font-semibold mb-3 text-slate-900 dark:text-white">Programming</h3>
+              <ul className="space-y-2 text-slate-600 dark:text-slate-400 text-sm">
+                <li>Python (NumPy, pandas, SciPy)</li>
+                <li>C++ (Numerical Computing)</li>
+                <li>SQL & Database Management</li>
+                <li>Git & Version Control</li>
+              </ul>
+            </div>
+            <div className="p-5 bg-white dark:bg-slate-900/30 border border-slate-200 dark:border-slate-800 rounded-lg">
+              <h3 className="font-semibold mb-3 text-slate-900 dark:text-white">Quantitative Finance</h3>
+              <ul className="space-y-2 text-slate-600 dark:text-slate-400 text-sm">
+                <li>Stochastic Calculus</li>
+                <li>Time Series Analysis</li>
+                <li>Monte Carlo Methods</li>
+                <li>Market Risk Modeling</li>
+              </ul>
+            </div>
+            <div className="p-5 bg-white dark:bg-slate-900/30 border border-slate-200 dark:border-slate-800 rounded-lg">
+              <h3 className="font-semibold mb-3 text-slate-900 dark:text-white">Mathematics</h3>
+              <ul className="space-y-2 text-slate-600 dark:text-slate-400 text-sm">
+                <li>Linear Algebra</li>
+                <li>Probability & Statistics</li>
+                <li>Partial Differential Equations</li>
+                <li>Optimization Algorithms</li>
+              </ul>
+            </div>
+          </div>
+        </motion.section>
+
+        {/* Projects Section - Refined */}
+        <motion.section
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          variants={fadeIn}
+          className="mb-20"
+        >
+          <h2 className="text-2xl font-bold mb-6 text-slate-900 dark:text-white">Projects</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="group block p-6 bg-white dark:bg-slate-900/30 border border-slate-200 dark:border-slate-800 rounded-lg hover:border-blue-500/50 transition-colors">
+              <h3 className="text-lg font-semibold mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                Market Risk Model Implementation
+              </h3>
+              <p className="text-slate-600 dark:text-slate-400 text-sm mb-4">
+                Implemented VaR and Expected Shortfall models using historical simulation and parametric methods on S&P 500 data.
+              </p>
+              <div className="flex gap-2 text-xs text-slate-500">
+                <span className="bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">Python</span>
+                <span className="bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">Pandas</span>
+              </div>
+            </div>
+            {/* Added a second placeholder project relevant to Quant */}
+            <div className="group block p-6 bg-white dark:bg-slate-900/30 border border-slate-200 dark:border-slate-800 rounded-lg hover:border-blue-500/50 transition-colors">
+              <h3 className="text-lg font-semibold mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                Option Pricing Engine
+              </h3>
+              <p className="text-slate-600 dark:text-slate-400 text-sm mb-4">
+                Developed a C++ pricing engine for European and American options using Black-Scholes and Binomial Tree models.
+              </p>
+              <div className="flex gap-2 text-xs text-slate-500">
+                <span className="bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">C++</span>
+                <span className="bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">Numerical Methods</span>
+              </div>
+            </div>
+          </div>
+        </motion.section>
+
+        {/* Contact/socials */}
+        <motion.footer
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeIn}
+          className="pt-12 border-t border-slate-200 dark:border-slate-800 flex flex-col md:flex-row justify-between items-center gap-6"
+        >
+          <div className="text-slate-500 text-sm">
+            © {new Date().getFullYear()} Saad Alam. All rights reserved.
+          </div>
+          <div className="flex gap-6">
+            <a href="https://github.com/saad-alam12" className="text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors">
+              <span className="sr-only">GitHub</span>
+              <Github className="w-5 h-5" />
+            </a>
+            <a href="https://www.linkedin.com/in/saad-alam-3a49491b4" className="text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors">
+              <span className="sr-only">LinkedIn</span>
+              <Linkedin className="w-5 h-5" />
+            </a>
+            <a href="mailto:saad.alam@gmx.de" className="text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors">
+              <span className="sr-only">Email</span>
+              <Mail className="w-5 h-5" />
+            </a>
+          </div>
+        </motion.footer>
+      </main>
     </div>
   )
 }

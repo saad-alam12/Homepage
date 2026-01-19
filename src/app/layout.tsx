@@ -1,17 +1,21 @@
 import type { Metadata } from "next";
-import { Fira_Code } from "next/font/google";
+import { Inter, Fira_Code } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/providers/theme-provider";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+});
 
 const firaCode = Fira_Code({
   variable: "--font-fira-code",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
-  title: "Saad Alam - Physics Student at TUM",
-  description: "Personal homepage of Saad Alam, Physics student at Technical University of Munich with interests in AI and Machine Learning",
+  title: "Saad Alam | Quantitative Research Portfolio",
+  description: "Portfolio of Saad Alam, Physics M.Sc. Student at TUM and aspiring Quantitative Researcher.",
 };
 
 export default function RootLayout({
@@ -22,13 +26,14 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${firaCode.variable} font-mono antialiased`}
+        className={`${inter.variable} ${firaCode.variable} font-sans antialiased bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100`}
         suppressHydrationWarning
       >
         <ThemeProvider
           attribute="class"
-          defaultTheme="dark"
-          enableSystem={false}
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
         >
           {children}
         </ThemeProvider>

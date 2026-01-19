@@ -1,92 +1,37 @@
 @import "tailwindcss";
 
 @theme {
-  --default-transition-duration: 150ms;
+  --font-inter: var(--font-inter);
+  --font-fira-code: var(--font-fira-code);
 }
 
 @variant dark (.dark &);
 
-:root {
-  --font-fira-code: 'Fira Code', monospace;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
+/* Base utilities */
+@layer base {
+  body {
+    @apply font-sans;
   }
 }
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideIn {
-  from {
-    transform: translateX(-100%);
-  }
-  to {
-    transform: translateX(0);
-  }
-}
-
-body {
-  font-family: var(--font-fira-code);
-  animation: fadeIn 1s ease-in forwards;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  cursor: auto;
-  background-image: 
-    radial-gradient(circle at 20% 20%, rgba(124, 58, 237, 0.15) 0%, transparent 40%),
-    radial-gradient(circle at 80% 80%, rgba(124, 58, 237, 0.1) 0%, transparent 40%),
-    radial-gradient(circle at 50% 10%, rgba(124, 58, 237, 0.08) 0%, transparent 30%),
-    radial-gradient(circle at 90% 40%, rgba(124, 58, 237, 0.12) 0%, transparent 35%),
-    linear-gradient(45deg, transparent 40%, rgba(124, 58, 237, 0.03) 50%, transparent 60%);
-  background-size: 100% 100%, 100% 100%, 80% 80%, 60% 60%, 100% 100%;
-  background-attachment: fixed;
-}
-
-/* Ensure cursor is visible on all elements */
-* {
-  cursor: inherit;
-}
-
-/* Custom scrollbar */
+/* Custom Scrollbar for professional feel without being invasive */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-white dark:bg-black;
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-purple-600 rounded-full;
+  @apply bg-slate-300 dark:bg-slate-700 rounded-full;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-purple-700;
+  @apply bg-slate-400 dark:bg-slate-600;
 }
 
-/* Selection styling */
-::selection {
-  @apply bg-purple-600/30;
-}
-
-/* Focus styles */
-*:focus-visible {
-  @apply outline-2 outline-offset-2 outline-purple-600 rounded-sm;
-}
-
-/* 3D perspective for hover effects */
+/* Perspective for 3D cards if needed, but toned down */
 .perspective-container {
-  perspective: 1000px;
+  perspective: 2000px;
 }
