@@ -85,17 +85,17 @@ export default function Home() {
 
           <div className="bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-lg p-6 md:p-8 shadow-sm hover:shadow-md transition-shadow">
             <h3 className="text-xl font-semibold mb-3">
-              Investigating the Validity of the Ginzburg-Landau Theory for the 2D Ising Model
+              Optimization Methods for Material Science
             </h3>
             <p className="text-slate-600 dark:text-slate-400 mb-6 leading-relaxed">
-              Explored the applicability of Ginzburg-Landau mean-field theory to the two-dimensional Ising model near critical points.
-              Utilized Monte Carlo simulations to analyze phase transitions and comparing theoretical predictions with numerical data.
-              The study provided insights into the limitations of mean-field approximations in low-dimensional systems.
+              Implemented Bayesian optimization for the &quot;Setup for LOw-energy Positron Experiments&quot; (SLOPE) to improve beam focus and stability, demonstrating superior robustness compared to conventional algorithms like Downhill Simplex.
+              Additionally, applied deep learning techniques to accelerate beam evaluation measurements, significantly reducing processing time while maintaining high accuracy.
             </p>
             <div className="flex flex-wrap gap-3">
-              <span className="px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-full text-sm font-medium text-slate-600 dark:text-slate-300">Statistical Physics</span>
-              <span className="px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-full text-sm font-medium text-slate-600 dark:text-slate-300">Monte Carlo Simulations</span>
-              <span className="px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-full text-sm font-medium text-slate-600 dark:text-slate-300">Python/C++</span>
+              <span className="px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-full text-sm font-medium text-slate-600 dark:text-slate-300">Bayesian Optimization</span>
+              <span className="px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-full text-sm font-medium text-slate-600 dark:text-slate-300">Deep Learning</span>
+              <span className="px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-full text-sm font-medium text-slate-600 dark:text-slate-300">Python</span>
+              <span className="px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-full text-sm font-medium text-slate-600 dark:text-slate-300">Positron Physics</span>
             </div>
             <div className="mt-6">
               <a
