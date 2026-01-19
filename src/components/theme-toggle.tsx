@@ -13,9 +13,7 @@ export function ThemeToggle() {
   }, [])
 
   if (!mounted) {
-    return (
-      <div className="fixed top-5 right-5 z-50 w-12 h-12 rounded-full bg-white border border-black" />
-    )
+    return <div className="w-9 h-9 rounded-full bg-slate-200 dark:bg-slate-800" />
   }
 
   const isDark = theme === 'dark'
@@ -23,13 +21,13 @@ export function ThemeToggle() {
   return (
     <button
       onClick={() => setTheme(isDark ? 'light' : 'dark')}
-      className="fixed top-5 right-5 z-50 flex items-center justify-center w-12 h-12 rounded-full bg-white dark:bg-black border border-black dark:border-white hover:border-purple-600 transition-all duration-200"
+      className="p-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-slate-100 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
       aria-label="Toggle theme"
     >
       {isDark ? (
-        <Sun className="w-5 h-5 text-purple-600" />
+        <Sun className="w-4 h-4" />
       ) : (
-        <Moon className="w-5 h-5 text-purple-600" />
+        <Moon className="w-4 h-4" />
       )}
     </button>
   )

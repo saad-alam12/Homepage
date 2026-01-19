@@ -1,8 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { ThemeToggle } from '@/components/theme-toggle'
-import { FloatingNav } from '@/components/floating-nav'
+import { Navbar } from '@/components/navbar'
 import { Download, Mail, Github, Linkedin, FileText, ChevronRight } from 'lucide-react'
 
 // Professional, subtle animations
@@ -26,10 +25,9 @@ const stagger = {
 export default function Home() {
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 selection:bg-blue-100 dark:selection:bg-blue-900/30">
-      <ThemeToggle />
-      <FloatingNav />
+      <Navbar />
 
-      <main className="container mx-auto px-6 py-12 max-w-5xl">
+      <main className="container mx-auto px-6 py-12 max-w-5xl" id="home">
         {/* Header / Hero */}
         <motion.header
           initial="hidden"
@@ -63,7 +61,7 @@ export default function Home() {
             <a
               href="LebenslaufSaadAlam2025.pdf"
               target="_blank"
-              className="inline-flex items-center gap-2 px-5 py-2.5 border border-slate-300 dark:border-slate-700 rounded-md font-medium hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+              className="inline-flex items-center gap-2 px-5 py-2.5 border border-slate-300 dark:border-slate-700 bg-transparent text-slate-900 dark:text-slate-100 rounded-md font-medium hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
             >
               <Download className="w-4 h-4" />
               CV
@@ -73,11 +71,12 @@ export default function Home() {
 
         {/* Bachelor Thesis Section - NEW */}
         <motion.section
+          id="thesis"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
           variants={fadeIn}
-          className="mb-20"
+          className="mb-20 scroll-mt-24"
         >
           <div className="flex items-center gap-3 mb-6">
             <FileText className="w-6 h-6 text-blue-600 dark:text-blue-400" />
@@ -152,11 +151,12 @@ export default function Home() {
 
         {/* Projects Section - Refined */}
         <motion.section
+          id="projects"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
           variants={fadeIn}
-          className="mb-20"
+          className="mb-20 scroll-mt-24"
         >
           <h2 className="text-2xl font-bold mb-6 text-slate-900 dark:text-white">Projects</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -190,11 +190,12 @@ export default function Home() {
 
         {/* Contact/socials */}
         <motion.footer
+          id="contact"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={fadeIn}
-          className="pt-12 border-t border-slate-200 dark:border-slate-800 flex flex-col md:flex-row justify-between items-center gap-6"
+          className="pt-12 border-t border-slate-200 dark:border-slate-800 flex flex-col md:flex-row justify-between items-center gap-6 scroll-mt-24"
         >
           <div className="text-slate-500 text-sm">
             © {new Date().getFullYear()} Saad Alam. All rights reserved.
