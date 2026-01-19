@@ -14,8 +14,15 @@ const firaCode = Fira_Code({
 });
 
 export const metadata: Metadata = {
-  title: "Saad Alam | Quantitative Research Portfolio",
-  description: "Portfolio of Saad Alam, Physics M.Sc. Student at TUM and aspiring Quantitative Researcher.",
+  title: "Saad Alam | Physics M.Sc. · Quantitative Finance",
+  description: "Physics M.Sc. student at TUM seeking working student positions in quantitative research, algorithmic trading, and market risk management. Strong background in mathematical modeling, Python, C++, and statistical analysis.",
+  keywords: ["quantitative research", "physics", "TUM", "quant finance", "risk management", "Python", "algorithmic trading"],
+  authors: [{ name: "Saad Alam" }],
+  openGraph: {
+    title: "Saad Alam | Quantitative Finance Portfolio",
+    description: "Physics M.Sc. student at TUM seeking opportunities in quantitative finance.",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
